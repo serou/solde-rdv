@@ -34,7 +34,7 @@
 		 <div id="masquerAfficherMenu" class="w3-animate-left" style="position:absolute;left:360px;top:300px;visibility:visible;cursor:pointer;z-index:5;"><img src="common/images/masquer_menu.png"/></div>
 		
 		<!-- Info bulle au click sur un marker -->
-		<div id="bigInfoBulle" class="w3-content w3-margin-top" style="max-width:1000px;display:none;">
+		<div id="bigInfoBulle" class="w3-content w3-margin-top" style="max-width:1000px;display:block;">
 
 		  <!-- The Grid -->
 		  <div class="w3-row-padding-3">
@@ -45,7 +45,7 @@
 	
 			  <div class="w3-white w3-text-grey w3-card-4">
 				<div class="w3-display-container">
-				  <img src="serou.jpg" style="width:100%" alt="Avatar">
+				  <img src="common/images/logo.png" style="width:100%" alt="Avatar">
 				  <div class="w3-display-bottomleft w3-container w3-text-black">
 					<h2>Jane Doe</h2>
 				  </div>
