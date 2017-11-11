@@ -52,4 +52,38 @@ class Map extends BDD{
 		
 		return $count; // Accès au résultat
     }
+//__Recuperation pour affichage du produit ayant cet id.
+	function getIdProduit( $id ) {
+	    $bdd = parent::getBdd();
+	
+		$sql = "SELECT *";
+		$sql .= " FROM produits AS pd";
+		$sql .= " INNER JOIN structures AS st";
+		$sql .= " ON pd.code_structure = st.code_structure";
+		$sql .= " WHERE pd.code_produit=".$id;
+	
+		$datas = $bdd->query($sql);
+	
+		if ($resultat = $datas->fetch(PDO::FETCH_OBJ)) {
+	        $count = $resultat;
+	    }
+	
+		return $count; // Accès au résultat
+	}
+	
+	function getCommentairesProduit( $idProd ) {
+	    $bdd = parent::getBdd();
+	
+		$sql = "SELECT *";
+		$sql .= " FROM commentaires";
+		$sql .= " WHERE code_produit=".$idProd;
+	
+		$datas = $bdd->query($sql);
+	
+		if ($resultat = $datas->fetch(PDO::FETCH_OBJ)) {
+	        $count = $resultat;
+	    }
+	
+		return $count; // Accès au résultat
+	}
 }

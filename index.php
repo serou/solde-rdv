@@ -31,6 +31,16 @@
 			$catProd = $map->getAllMarkersActif();
 			$allProdJson = json_encode($catProd);
 		}
+	// gestion de produit avec commentaires
+		if (isset($_GET['produit'])) {
+			$produit = $_GET['produit'];
+			
+			$prod = $map->getIdProduit($produit);
+			$commentaires = $map->getCommentairesProduit($produit);
+			
+			$prodJson = json_encode($prod);
+			$commentairesJson = json_encode($commentaires);
+		}
 		
 		
 		require_once("view/vueIndex.php");

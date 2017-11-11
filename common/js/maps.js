@@ -55,7 +55,8 @@
 		})
 			.addTo(mymap);
 			
-		info = "<div class='w3-container w3-row'>"
+		info =  "<a href='index.php?produit="+station['code_produit']+"'>"
+				+"<div class='w3-container w3-row'>"
 					+"<div class='w3-col s3'>"
 					+"  <img src='/w3images/avatar2.png' class='w3-circle w3-margin-right' style='width:46px'>"
 					+"</div>"
@@ -63,14 +64,16 @@
 					+"  <span>"+station['lib_produit']+", <strong>"+(station['prix_initial']-(station['prix_initial']/100*station['reduction']))+"fr</strong> "+station['prix_initial']+"fr</span><br>"
 					+"  <span>"+station['nom_structure']+", tel:"+station['contact_structure']+"</span>"
 					+"</div>"
-				+"</div>";
+				+"</div>"
+				+"</a>";
 
 		for(var ii=0; ii<marker.length; ii++){
 			station2 = marker[ii];
 			
 			if(station['code_structure'] === station2['code_structure'] && station['code_produit'] !== station2['code_produit']){
 
-				info += "<div class='w3-container w3-row'>"
+				info += "<a href='index.php?produit="+station['code_produit']+"'>"
+					+"<div class='w3-container w3-row'>"
 						+"<div class='w3-col s3'>"
 						+"  <img src='/w3images/avatar2.png' class='w3-circle w3-margin-right' style='width:46px'>"
 						+"</div>"
@@ -78,7 +81,8 @@
 						+"  <span>"+station['lib_produit']+", <strong>"+(station['prix_initial']-(station['prix_initial']/100*station['reduction']))+"fr</strong> "+station['prix_initial']+"fr</span><br>"
 						+"  <span>"+station['nom_structure']+", tel:"+station['contact_structure']+"</span>"
 						+"</div>"
-					+"</div>";
+					+"</div>"
+					+"</a>";;
 			}
 			
 		}
@@ -94,7 +98,8 @@
 	for (i=0; i<markerLen && i<50; i++){
 		if(marker[i]){
 			list = marker[i];
-			listProd.innerHTML += "<div class='w3-container w3-row'  style='border-bottom: 1px solid green;padding:5px;margin:0;font-size:0.9em;'>"
+			listProd.innerHTML += "<a href='index.php?produit="+list['code_produit']+"'>"
+									+"<div class='w3-container w3-row'  style='border-bottom: 1px solid green;padding:5px;margin:0;font-size:0.9em;'>"
 										+"<div class='w3-col s3'>"
 										+"  <img src='/w3images/avatar2.png' class='w3-circle w3-margin-right' style='width:46px'>"
 										+"</div>"
@@ -102,6 +107,7 @@
 										+"  <span>"+list['lib_produit']+", <strong>"+(list['prix_initial']-(list['prix_initial']/100*list['reduction']))+" fr</strong></span>, <span>"+list['prix_initial']+"<br>"
 										+"  <span>"+station['nom_structure']+", tel:"+station['contact_structure']+"</span>"
 								+"</div>"
+								+"</a>"
 								
 			
 		}
