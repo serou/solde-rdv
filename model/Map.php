@@ -71,19 +71,35 @@ class Map extends BDD{
 		return $count; // Accès au résultat
 	}
 	
-	function getCommentairesProduit( $idProd ) {
+	function getCommentairesProduit( $id ) {
 	    $bdd = parent::getBdd();
 	
 		$sql = "SELECT *";
 		$sql .= " FROM commentaires";
-		$sql .= " WHERE code_produit=".$idProd;
+		$sql .= " WHERE code_produit=".$id;
 	
 		$datas = $bdd->query($sql);
 	
-		if ($resultat = $datas->fetch(PDO::FETCH_OBJ)) {
-	        $count = $resultat;
+		while ($resultat = $datas->fetch(PDO::FETCH_OBJ)) {
+	        $count[] = $resultat;
 	    }
 	
 		return $count; // Accès au résultat
 	}
+	
+	
+	//__Insertion d'un commentaire
+    function getInsertCommentaire($text_cmt, $nom_propr_cmt, $code_produit) {
+        $bdd = parent::getBdd();
+		
+		$sql = "INSERT INTO commentaires (text_cmt, date_cmt, heure_cmt, nom_propr_cmt, code_produit)";
+		$sql .= " VALUES (:text_cmt, NOW(), NOW(), :nom_propr_cmt, :code_produit)";
+	
+		$stmt = $bdd->prepare($sql);
+		$stmt->bindParam(':text_cmt', $text_cmt);
+		$stmt->bindParam(':nom_propr_cmt', $nom_propr_cmt);
+		$stmt->bindParam(':code_produit', $code_produit);
+			
+		$stmt->execute();
+    }
 }

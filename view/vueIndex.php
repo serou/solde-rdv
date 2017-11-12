@@ -32,10 +32,10 @@
 				  <i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><?php echo $prod->contact_structure ?></p>
 				  
 				</div>
-			<?php foreach($commentaires as $commentaire) : ?>
-				<p><strong> <?php echo $commentaire->nom_propr_cmt ?> :</strong> <?php echo $commentaire->text_cmt ?></p>
-			<?php endforeach; ?>
-					<form class="form-inline" action="/action_page.php">
+				<?php foreach ( $commentaires as $commentaire ) : ?>
+					<p><strong> <?php echo $commentaire->nom_propr_cmt; ?> :</strong> <?php echo $commentaire->text_cmt; ?></p>
+				<?php endforeach;  ?>
+					<form class="form-inline" action="index.php?produit=<?php echo $produit ?>" method="POST">
 						<div class="form-group">
 						  <label class="sr-only" for="pseudo">Pseudo:</label>
 						  <input type="pseudo" class="form-control" id="pseudo" placeholder="Enter votre pseudo"  name="pseudo">
