@@ -169,7 +169,14 @@ var envoiCmt = document.getElementById('envoi_commentaire');
 
 if(envoiCmt){
 	envoiCmt.onclick = function(){
-		formCmt.submit();
+		var inputs = formCmt.getElementsByTagName('input');
+		if(!inputs[0].value){
+			inputs[0].focus();
+		}else if(!inputs[1].value){
+			inputs[1].focus();
+		}else{
+			formCmt.submit();
+		}
 	};
 }
 /****************** Fin soumettre le commentaire d'un produit **********************/

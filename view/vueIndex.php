@@ -40,10 +40,10 @@
 				<?php endforeach;  ?>
 					<form  id="form_commentaire" class="form-inline" action="index.php?produit=<?php echo $produit ?>" method="POST">
 						  <label class="sr-only" for="pseudo">Pseudo:</label>
-						  <input class="form-control w3-input w3-animate-input" type="text" id="pseudo" placeholder="Votre pseudo"  name="pseudo" style="width:135px; height:30px; max-width:70%"><br>
+						  <input class="form-control w3-input w3-animate-input" type="text" id="pseudo" placeholder="Votre pseudo"  name="pseudo" style="width:135px; height:35px; max-width:70%"><br>
 						
 						  <label class="sr-only" for="commentaire">Commentaire:</label>
- 				    	  <input class="form-control w3-input w3-border w3-animate-input" type="text" id="commentaire" placeholder="Votre commentaire" name="commentaire" style="width:155px; height:30px; max-width:90%">
+ 				    	  <input class="form-control w3-input w3-border w3-animate-input" type="text" id="commentaire" placeholder="Votre commentaire" name="commentaire" style="width:155px; height:35px; max-width:90%">
 
  					      <a href="#" id="envoi_commentaire" title="Envoyer"><i class="fa fa-send-o" style="font-size:18px; color:#337AB7"></i></a>
 						<!--button type="submit" class="btn btn-default">Envoyer</button-->
