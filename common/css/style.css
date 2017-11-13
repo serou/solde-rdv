@@ -78,24 +78,63 @@ div.col-sm-12{
 .mylocation {
     position: absolute;
     top: 15%;
-    right: 1%;
+    right: 2%;
     width:30px;
     height:  30px;
-   /* transform: translate(-50%, 10%); */
-    -webkit-border-radius: 15;
-    -moz-border-radius: 15;
-    border-radius: 15px;
-    background: #ffffff;
-    padding: 0px 0px 0px 0px;
-    border: solid #1f628d 2px;
-    text-decoration: none;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.5);
+
     z-index:5;
 }
-
 .mylocation:hover {
-    background: #1f628d;
-    text-decoration: none;
-    color: #ffffff;
- /*    border: none; */
+
+    background-color: rgba(0, 0, 0, 0.6);
+    border:2px solid black;
+
 }
+
 /*fin se positionner*/
+
+/* Image produit */
+#image_produit {
+    position: relative;
+    width: 100%;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+#image_produit:hover .image {
+  opacity: 0.3;
+}
+
+#image_produit:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 5px 8px;
+  margin: 0px 0px;
+}
+/* Fin image produit */

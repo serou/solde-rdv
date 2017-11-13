@@ -6,8 +6,8 @@
 		
 		<div id="map-canvas" style="z-index:2;"></div>
 <!-- se positionner -->
-		<div>
-			<button id="myLocation" class="mylocation" title="Me positionner"></button>
+		<div id="myLocation" class="mylocation" title="Me positionner" style="cursor:pointer">
+			<i class="fa fa-location-arrow" style="font-size:30px;color:rgba(0, 0, 0, 0.7);"></i>
 		</div>
 <!-- fin se positionner -->
 		
@@ -19,38 +19,41 @@
 		  <div class="w3-container">
 	
 			  <div class="w3-white w3-text-grey w3-card-4">
-				<div class="w3-display-container">
-				  <img src="serou.jpg" style="width:100%" alt="Avatar">
-				  <div class="w3-display-bottomleft w3-container w3-text-black">
-					<h2><?php echo $prod->lib_produit .' -'. $prod->reduction .'%' ?></h2>
-				  </div>
+				<div class="w3-display-container" id="image_produit">
+				
+					<img src="serou.jpg" alt="Avatar" class="image" style="width:100%">
+				    <div class="middle">
+					  <div class="text"><?php echo nl2br(stripslashes($prod->lib_produit)) .' -'. nl2br(stripslashes($prod->reduction)) .'%' ?></div>
+				    </div>
+  
+				  
 				</div>
 				<div class="w3-container">
 				  <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><?php echo $prod->prix_initial - ($prod->prix_initial * $prod->reduction / 100).' fcfa' ?>
-				  <i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><?php echo $prod->adresse_structure ?></p>
-				  <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><?php echo $prod->nom_structure ?>
-				  <i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><?php echo $prod->contact_structure ?></p>
+				  <i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><?php echo nl2br(stripslashes($prod->adresse_structure)) ?></p>
+				  <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><?php echo nl2br(stripslashes($prod->nom_structure)) ?>
+				  <i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><?php echo nl2br(stripslashes($prod->contact_structure)) ?></p>
 				  
 				</div>
 				<?php foreach ( $commentaires as $commentaire ) : ?>
-					<p><strong> <?php echo $commentaire->nom_propr_cmt; ?> :</strong> <?php echo $commentaire->text_cmt; ?></p>
+					<p><strong> <?php echo nl2br(stripslashes($commentaire->nom_propr_cmt)); ?> :</strong> <?php echo nl2br(stripslashes($commentaire->text_cmt)); ?></p>
 				<?php endforeach;  ?>
-					<form class="form-inline" action="index.php?produit=<?php echo $produit ?>" method="POST">
-						<div class="form-group">
+					<form  id="form_commentaire" class="form-inline" action="index.php?produit=<?php echo $produit ?>" method="POST">
 						  <label class="sr-only" for="pseudo">Pseudo:</label>
-						  <input type="pseudo" class="form-control" id="pseudo" placeholder="Enter votre pseudo"  name="pseudo">
-						</div>
-						<div class="form-group">
+						  <input class="form-control w3-input w3-animate-input" type="text" id="pseudo" placeholder="Votre pseudo"  name="pseudo" style="width:135px; height:30px; max-width:70%"><br>
+						
 						  <label class="sr-only" for="commentaire">Commentaire:</label>
-						  <input type="commentaire" class="form-control" id="commentaire" placeholder="Enter un commentaire" name="commentaire">
-						</div>
-						<button type="submit" class="btn btn-default">Envoyer</button>
+ 				    	  <input class="form-control w3-input w3-border w3-animate-input" type="text" id="commentaire" placeholder="Votre commentaire" name="commentaire" style="width:155px; height:30px; max-width:90%">
+
+ 					      <a href="#" id="envoi_commentaire" title="Envoyer"><i class="fa fa-send-o" style="font-size:18px; color:#337AB7"></i></a>
+						<!--button type="submit" class="btn btn-default">Envoyer</button-->
 					 </form>
 				 </div>
 			
 		  </div>
 <?php
  	 }else{
+ 	 
 ?>
 		  <div class="w3-container w3-row">
 			<div class="w3-col s4">
