@@ -40,20 +40,22 @@
 			
 			$prodJson = json_encode($prod);
 			$commentairesJson = json_encode($commentaires);
-			
-			if (isset($_POST['pseudo']) && isset($POST['commentaire'])) {
-			
-				if(!empty($_POST['pseudo'])){
-					$pseudo = $_POST['pseudo'];
-					$commentaire = $POST['commentaire'];
-					
-					$insertCommentaire = $map->getInsertCommentaire($commentaire, $pseudo, $produit);
-				}else{
-					$erreur = 'veuillez vous connecter ou entrez un pseudo pour pouvoir commenter';
-				}
-				
-			}
 		
+		}
+		if (isset($_POST['pseudo']) && isset($POST['commentaire'])) {
+			
+			if(!empty($_POST['pseudo'])){
+				$pseudo = $_POST['pseudo'];
+				$commentaire = $POST['commentaire'];
+				$produit = $_GET['produit'];
+				$date = date('d/m/Y');
+				$heure = date('H:i:s');
+				
+				$insertCommentaire = $map->getInsertCommentaire($commentaire, $pseudo, $produit, $date, $heure);
+			}else{
+				$erreur = 'veuillez vous connecter ou entrez un pseudo pour pouvoir commenter';
+			}
+			
 		}
 		
 		

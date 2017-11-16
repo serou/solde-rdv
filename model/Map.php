@@ -89,16 +89,18 @@ class Map extends BDD{
 	
 	
 	//__Insertion d'un commentaire
-    function getInsertCommentaire($text_cmt, $nom_propr_cmt, $code_produit) {
+    function getInsertCommentaire($text_cmt, $nom_propr_cmt, $code_produit, $date, $heure) {
         $bdd = parent::getBdd();
 		
-		$sql = "INSERT INTO commentaires (text_cmt, date_cmt, heure_cmt, nom_propr_cmt, code_produit)";
-		$sql .= " VALUES (:text_cmt, NOW(), NOW(), :nom_propr_cmt, :code_produit)";
+		$sql = "INSERT INTO commentaires (text_cmt, nom_propr_cmt, code_produit, date_cmt, heure_cmt)";
+		$sql .= " VALUES (:text_cmt, :nom_propr_cmt, :code_produit, :date, :heure)";
 	
 		$stmt = $bdd->prepare($sql);
 		$stmt->bindParam(':text_cmt', $text_cmt);
 		$stmt->bindParam(':nom_propr_cmt', $nom_propr_cmt);
 		$stmt->bindParam(':code_produit', $code_produit);
+		$stmt->bindParam(':date', $date);
+		$stmt->bindParam(':heure', $heure);
 			
 		$stmt->execute();
     }

@@ -1,7 +1,6 @@
 <?php include_once("template/vueHeader.php"); ?>
 
 	<body>
-
 		<?php include_once("template/vueNavbar.php"); ?>
 		
 		<div id="map-canvas" style="z-index:2;"></div>
@@ -72,6 +71,75 @@
 			<h2>soldes recents</h2>
 			
 		  </div>
+ <!--  Essai  ---->
+		  <div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<ul class="event-list">
+							<li>
+								<img alt="dj-set" src="https://st.depositphotos.com/1430909/1434/i/950/depositphotos_14345167-stock-photo-dj-playing-the-track.jpg" />
+								
+								<div class="info">
+							
+									<div class="row">
+										<div class="col-sm-10 col-sm-offset-1">
+											<h2 class="title">Laco anniversary</h2>
+										</div>	
+									</div>
+									<div class="row">
+										<div class="col-sm-3">Start:</div>
+										<div class="col-sm-9">29 Oct 2018 (23:30)</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-3">End:</div>
+										<div class="col-sm-9">30 Oct 2018 (06:00)</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-3">Address:</div>
+										<div class="col-sm-9">Falckensteinstraße 49, 10997 Berlin</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-3">Cost:</div>
+										<div class="col-sm-9">€15</div>
+									</div>							
+								</div>
+
+							</li>
+							<li>
+								<img alt="dj-set" src="https://st.depositphotos.com/1430909/1434/i/950/depositphotos_14345167-stock-photo-dj-playing-the-track.jpg" />
+								
+								<div class="info">
+							
+									<div class="row">
+										<div class="col-sm-10 col-sm-offset-1">
+											<h2 class="title">Laco anniversary</h2>
+										</div>	
+									</div>
+									<div class="row">
+										<div class="col-sm-3">Start:</div>
+										<div class="col-sm-9">29 Oct 2018 (23:30)</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-3">End:</div>
+										<div class="col-sm-9">30 Oct 2018 (06:00)</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-3">Address:</div>
+										<div class="col-sm-9">Falckensteinstraße 49, 10997 Berlin</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-3">Cost:</div>
+										<div class="col-sm-9">€15</div>
+									</div>							
+								</div>
+
+							</li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+ <!---Fin essai --->
 <?php
  	 }
 ?>
@@ -81,6 +149,10 @@
 			
 		<script>	
 			var marker = <?php echo $allProdJson; ?> // stockage du resultat de la requête
+			
+			$(document).ready(function(){
+				$("[rel='tooltip']").tooltip();
+			});
 		</script>
 	
 		<?php include_once("template/vueFooter.php"); ?>
