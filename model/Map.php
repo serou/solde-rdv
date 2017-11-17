@@ -104,4 +104,27 @@ class Map extends BDD{
 			
 		$stmt->execute();
     }
+    
+/*******************Essai info caroussel**********************/
+	function getStructuresOfCatProd( $catProd ) {
+		$bdd = parent::getBdd();
+
+		$sql = "SELECT *";
+		$sql .= " FROM structures AS st";
+		$sql .= " INNER JOIN produits AS pd";
+		$sql .= " ON st.code_structure = pd.code_structure";
+		$sql .= " INNER JOIN categories AS ct";
+		$sql .= " ON pd.code_categorie_produit = ct.code_categorie_produit";
+		$sql .= " WHERE ct.lib_categorie_produit =".$catProd;
+
+		$datas = $bdd->query($sql);
+
+		while ($resultat = $datas->fetch(PDO::FETCH_OBJ)) {
+		    $count[] = $resultat;
+		}
+
+		return $count; // Accès au résultat
+	}
+	
+/*****************Fin Essai info caroussel********************/
 }

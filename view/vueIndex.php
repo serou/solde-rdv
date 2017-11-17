@@ -94,6 +94,12 @@
 			<div id="longitude" style="visibility:hidden;"><?php echo $_GET['lng'] ?></div>
 		<?php 
 			}
+			
+			for($i = 0; $i < $catLen $i++){
+		
+			echo $infoCat[$i]->nom_structure($categories[$i]);
+			
+		}
 		?>	
 		
 		<script>	

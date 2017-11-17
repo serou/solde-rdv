@@ -21,6 +21,15 @@
     	$map=new Map();
 		$categories = $map->getAllCategory();
 		
+/*******************Essai info caroussel**********************/
+		$catLen = count($categories);
+		for( $i = 0; $i < $catLen; $i++ ){
+		
+			$infosCat[$i] = $map->getStructuresOfCatProd($categories[$i]);
+			
+		}
+/*****************Fin Essai info caroussel********************/
+		
 		if (isset($_GET['category'])) {
 			$category = $_GET['category'];
 			
@@ -57,10 +66,6 @@
 			}
 			
 		}
-/*******************Essai info caroussel**********************/
-
-/*****************Fin Essai info caroussel********************/
-		
 		
 		require_once("view/vueIndex.php");
 		
