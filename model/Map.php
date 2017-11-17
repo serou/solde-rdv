@@ -89,42 +89,19 @@ class Map extends BDD{
 	
 	
 	//__Insertion d'un commentaire
-    function getInsertCommentaire($text_cmt, $nom_propr_cmt, $code_produit, $date, $heure) {
+    function getInsertCommentaire($text_cmt, $nom_propr_cmt, $code_produit) {
         $bdd = parent::getBdd();
 		
 		$sql = "INSERT INTO commentaires (text_cmt, nom_propr_cmt, code_produit, date_cmt, heure_cmt)";
-		$sql .= " VALUES (:text_cmt, :nom_propr_cmt, :code_produit, :date, :heure)";
+		$sql .= " VALUES (:text_cmt, :nom_propr_cmt, :code_produit, NOW(), NOW())";
 	
 		$stmt = $bdd->prepare($sql);
 		$stmt->bindParam(':text_cmt', $text_cmt);
 		$stmt->bindParam(':nom_propr_cmt', $nom_propr_cmt);
 		$stmt->bindParam(':code_produit', $code_produit);
-		$stmt->bindParam(':date', $date);
-		$stmt->bindParam(':heure', $heure);
 			
 		$stmt->execute();
     }
     
-/*******************Essai info caroussel**********************/
-	function getStructuresOfCatProd( $catProd ) {
-		$bdd = parent::getBdd();
 
-		$sql = "SELECT *";
-		$sql .= " FROM structures AS st";
-		$sql .= " INNER JOIN produits AS pd";
-		$sql .= " ON st.code_structure = pd.code_structure";
-		$sql .= " INNER JOIN categories AS ct";
-		$sql .= " ON pd.code_categorie_produit = ct.code_categorie_produit";
-		$sql .= " WHERE ct.lib_categorie_produit =".$catProd;
-
-		$datas = $bdd->query($sql);
-
-		while ($resultat = $datas->fetch(PDO::FETCH_OBJ)) {
-		    $count[] = $resultat;
-		}
-
-		return $count; // Accès au résultat
-	}
-	
-/*****************Fin Essai info caroussel********************/
 }

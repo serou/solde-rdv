@@ -21,51 +21,51 @@
     	$map=new Map();
 		$categories = $map->getAllCategory();
 		
-/*******************Essai info caroussel**********************/
-		$catLen = count($categories);
-		for( $i = 0; $i < $catLen; $i++ ){
-		
-			$infosCat[$i] = $map->getStructuresOfCatProd($categories[$i]);
-			
-		}
-/*****************Fin Essai info caroussel********************/
-		
+		//pour la getion des categories selectionner
 		if (isset($_GET['category'])) {
 			$category = $_GET['category'];
-			
+		
 			$catProd = $map->getMarkersCategory($category);
-			
+		
 			$allProdJson = json_encode($catProd);
 		} else {
 			$catProd = $map->getAllMarkersActif();
 			$allProdJson = json_encode($catProd);
 		}
-	// gestion de produit avec commentaires
-		if (isset($_GET['produit'])) {
-			$produit = $_GET['produit'];
-			
-			$prod = $map->getIdProduit($produit);
-			$commentaires = $map->getCommentairesProduit($produit);
-			
-			$prodJson = json_encode($prod);
-			$commentairesJson = json_encode($commentaires);
 		
-		}
-		if (isset($_POST['pseudo']) && isset($POST['commentaire'])) {
+		if(!empty($_GET)){
 			
-			if(!empty($_POST['pseudo'])){
-				$pseudo = $_POST['pseudo'];
-				$commentaire = $POST['commentaire'];
-				$produit = $_GET['produit'];
-				$date = date('d/m/Y');
-				$heure = date('H:i:s');
+			// gestion de produit avec commentaires
+			if (isset($_GET['produit'])) {
+			
+					$produit = $_GET['produit'];
+			
+					$prod = $map->getIdProduit($produit);
+					$commentaires = $map->getCommentairesProduit($produit);
+			
+					$prodJson = json_encode($prod);
+					$commentairesJson = json_encode($commentaires);
+					
+				if(!empty($_POST)){
 				
-				$insertCommentaire = $map->getInsertCommentaire($commentaire, $pseudo, $produit, $date, $heure);
-			}else{
-				$erreur = 'veuillez vous connecter ou entrez un pseudo pour pouvoir commenter';
+					$pseudo = $_POST['pseudo'];
+					$commentaire = $_POST['commentaire'];
+					$produit = $_GET['produit'];
+					
+					if($pseudo && $commentaire ){
+						$insertCommentaire = $map->getInsertCommentaire($commentaire, $pseudo, $produit);
+						$prod = $map->getIdProduit($produit);
+						$commentaires = $map->getCommentairesProduit($produit);
+					}else{
+						$erreur = 'veuillez vous connecter ou entrez un pseudo pour pouvoir commenter';
+					}
+				}
+				
 			}
 			
 		}
+	
+		
 		
 		require_once("view/vueIndex.php");
 		

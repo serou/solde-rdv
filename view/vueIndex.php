@@ -26,7 +26,7 @@
 				    </div>
   
 				  
-				</div>
+				</div> <br/>
 				<div class="w3-container">
 				  <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><?php echo $prod->prix_initial - ($prod->prix_initial * $prod->reduction / 100).' fcfa' ?>
 				  <i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><?php echo nl2br(stripslashes($prod->adresse_structure)) ?></p>
@@ -34,8 +34,11 @@
 				  <i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><?php echo nl2br(stripslashes($prod->contact_structure)) ?></p>
 				  
 				</div>
+				<div style="padding-left:20px;overflow:scroll;">
+					<h3>Commentaires</h3>
 				<?php foreach ( $commentaires as $commentaire ) : ?>
-					<p><strong> <?php echo nl2br(stripslashes($commentaire->nom_propr_cmt)); ?> :</strong> <?php echo nl2br(stripslashes($commentaire->text_cmt)); ?></p>
+					<p style="padding:0px;"><strong> <?php echo nl2br(stripslashes($commentaire->nom_propr_cmt)); ?> :</strong> <?php echo nl2br(stripslashes($commentaire->text_cmt)); ?> <span style="font-size:0.6em"><?php $date =strtotime($commentaire->date_cmt); echo date('d/m/Y',$date); ?></span></p>
+				
 				<?php endforeach;  ?>
 					<form  id="form_commentaire" class="form-inline" action="index.php?produit=<?php echo $produit ?>" method="POST">
 						  <label class="sr-only" for="pseudo">Pseudo:</label>
@@ -48,6 +51,7 @@
 						<!--button type="submit" class="btn btn-default">Envoyer</button-->
 					 </form>
 				 </div>
+			</div>
 			
 		  </div>
 <?php
@@ -95,11 +99,7 @@
 		<?php 
 			}
 			
-			for($i = 0; $i < $catLen $i++){
-		
-			echo $infoCat[$i]->nom_structure($categories[$i]);
-			
-		}
+
 		?>	
 		
 		<script>	
