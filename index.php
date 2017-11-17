@@ -57,6 +57,9 @@
 			}
 			
 		}
+/*******************Essai info caroussel**********************/
+
+/*****************Fin Essai info caroussel********************/
 		
 		
 		require_once("view/vueIndex.php");

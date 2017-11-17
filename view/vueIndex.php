@@ -20,7 +20,7 @@
 			  <div class="w3-white w3-text-grey w3-card-4">
 				<div class="w3-display-container" id="image_produit">
 				
-					<img src="serou.jpg" alt="Avatar" class="image" style="width:100%">
+					<img src="<?php echo 'common/images/'. $prod->image_produit ?>" alt="Avatar" class="image" style="width:100%">
 				    <div class="middle">
 					  <div class="text"><?php echo nl2br(stripslashes($prod->lib_produit)) .' -'. nl2br(stripslashes($prod->reduction)) .'%' ?></div>
 				    </div>
@@ -67,86 +67,35 @@
 		  </div>
 		  <hr>
 		  
-		  <div class="w3-container" id="list_produit">
+		  <div class="w3-container-fluid">
 			<h2>soldes recents</h2>
-			
-		  </div>
- <!--  Essai  ---->
-		  <div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<ul class="event-list">
-							<li>
-								<img alt="dj-set" src="https://st.depositphotos.com/1430909/1434/i/950/depositphotos_14345167-stock-photo-dj-playing-the-track.jpg" />
-								
-								<div class="info">
+				<div class='container-fluid'>
+					<div class='row'>
+						<div class='col-xs-12' style="padding-left:5px;padding-right:5px;">
+							<ul class='event-list' id="list_produit">
 							
-									<div class="row">
-										<div class="col-sm-10 col-sm-offset-1">
-											<h2 class="title">Laco anniversary</h2>
-										</div>	
-									</div>
-									<div class="row">
-										<div class="col-sm-3">Start:</div>
-										<div class="col-sm-9">29 Oct 2018 (23:30)</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-3">End:</div>
-										<div class="col-sm-9">30 Oct 2018 (06:00)</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-3">Address:</div>
-										<div class="col-sm-9">Falckensteinstraße 49, 10997 Berlin</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-3">Cost:</div>
-										<div class="col-sm-9">€15</div>
-									</div>							
-								</div>
-
-							</li>
-							<li>
-								<img alt="dj-set" src="https://st.depositphotos.com/1430909/1434/i/950/depositphotos_14345167-stock-photo-dj-playing-the-track.jpg" />
-								
-								<div class="info">
-							
-									<div class="row">
-										<div class="col-sm-10 col-sm-offset-1">
-											<h2 class="title">Laco anniversary</h2>
-										</div>	
-									</div>
-									<div class="row">
-										<div class="col-sm-3">Start:</div>
-										<div class="col-sm-9">29 Oct 2018 (23:30)</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-3">End:</div>
-										<div class="col-sm-9">30 Oct 2018 (06:00)</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-3">Address:</div>
-										<div class="col-sm-9">Falckensteinstraße 49, 10997 Berlin</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-3">Cost:</div>
-										<div class="col-sm-9">€15</div>
-									</div>							
-								</div>
-
-							</li>
-
-						</ul>
+							</ul>
+						</div>
 					</div>
 				</div>
-			</div>
- <!---Fin essai --->
+
+		  </div>
 <?php
  	 }
 ?>
 		</nav>
 		
 		 <div id="masquerAfficherMenu" class="w3-animate-left" style="position:absolute;left:360px;top:300px;visibility:visible;cursor:pointer;z-index:5;"><img src="common/images/masquer_menu.png"/></div>
-			
+		 
+		<?php if (isset($_GET['lat']) && isset($_GET['lat']) )
+			{
+		?>
+			<div id="latitude" style="visibility:hidden;"><?php echo $_GET['lat'] ?></div>
+			<div id="longitude" style="visibility:hidden;"><?php echo $_GET['lng'] ?></div>
+		<?php 
+			}
+		?>	
+		
 		<script>	
 			var marker = <?php echo $allProdJson; ?> // stockage du resultat de la requête
 			

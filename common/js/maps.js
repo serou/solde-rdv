@@ -28,8 +28,14 @@
 	 **********************************************/
 
 	
-
-	var mymap = L.map('map-canvas').setView([5.322306, -4.016299], 16);
+	var lat = document.getElementById('latitude');
+	var lng = document.getElementById('longitude');
+	var leZoom = lng ? 17 : 15;
+	lat = lat ? lat.innerHTML : 5.322306;
+	lng = lng ? lng.innerHTML : (-4.016299);
+	
+	
+	var mymap = L.map('map-canvas').setView([lat, lng], leZoom);
 	/*  mymap.zoomControl.setPosition('topright');  */
 			
 			L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -55,13 +61,13 @@
 		})
 			.addTo(mymap);
 			
-		info =  "<a href='index.php?produit="+station['code_produit']+"'>"
-				+"<div class='w3-container w3-row'>"
-					+"<div class='w3-col s3'>"
-					+"  <img src='/w3images/avatar2.png' class='w3-circle w3-margin-right' style='width:46px'>"
+		info =  "<a href='index.php?produit="+station['code_produit']+"&lat="+station['latitude']+"&lng="+station['longitude']+"'>"
+				+"<div class='w3-container w3-row' style='padding:0px;margin:0px;width:300px;text-align:center;'>"
+					+"<div class='w3-col s3' style='margin:0px;'>"
+					+"  <img src='common/images/"+station['image_produit']+"' class='w3-circle w3-margin-right' style='width:60px'>"
 					+"</div>"
-					+"<div class='w3-col s9 w3-bar'>"
-					+"  <span>"+station['lib_produit']+", <strong>"+(station['prix_initial']-(station['prix_initial']/100*station['reduction']))+"fr</strong> "+station['prix_initial']+"fr</span><br>"
+					+"<div class='w3-col s9 w3-bar' style='margin:0px;'>"
+					+"  <span><h2 style='padding:0px;margin:0px;'>"+station['lib_produit']+"</h2>, <strong>"+(station['prix_initial']-(station['prix_initial']/100*station['reduction']))+"fr</strong> "+station['prix_initial']+"fr</span><br>"
 					+"  <span>"+station['nom_structure']+", tel:"+station['contact_structure']+"</span>"
 					+"</div>"
 				+"</div>"
@@ -72,7 +78,7 @@
 			
 			if(station['code_structure'] === station2['code_structure'] && station['code_produit'] !== station2['code_produit']){
 
-				info += "<a href='index.php?produit="+station['code_produit']+"'>"
+				info += "<a href='index.php?produit="+station['code_produit']+"&lat="+station2['latitude']+"&lng="+station2['longitude']+"'>"
 					+"<div class='w3-container w3-row'>"
 						+"<div class='w3-col s3'>"
 						+"  <img src='/w3images/avatar2.png' class='w3-circle w3-margin-right' style='width:46px'>"
@@ -82,7 +88,7 @@
 						+"  <span>"+station['nom_structure']+", tel:"+station['contact_structure']+"</span>"
 						+"</div>"
 					+"</div>"
-					+"</a>";;
+					+"</a>";
 			}
 			
 		}
@@ -99,16 +105,37 @@
 		for (i=0; i<markerLen && i<50; i++){
 			if(marker[i]){
 				list = marker[i];
-				listProd.innerHTML += "<a href='index.php?produit="+list['code_produit']+"'>"
-										+"<div class='w3-container w3-row'  style='border-bottom: 1px solid green;padding:5px;margin:0;font-size:0.9em;'>"
-											+"<div class='w3-col s3'>"
-											+"  <img src='/w3images/avatar2.png' class='w3-circle w3-margin-right' style='width:46px'>"
-											+"</div>"
-											+"<div class='w3-col s9 w3-bar'>"
-											+"  <span>"+list['lib_produit']+", <strong>"+(list['prix_initial']-(list['prix_initial']/100*list['reduction']))+" fr</strong></span>, <span>"+list['prix_initial']+"<br>"
-											+"  <span>"+station['nom_structure']+", tel:"+station['contact_structure']+"</span>"
-									+"</div>"
-									+"</a>"
+				listProd.innerHTML += "<a href='index.php?produit="+list['code_produit']+"&lat="+list['latitude']+"&lng="+list['longitude']+"'>"
+									+"<li>"
+										+"				<img alt='"+list['lib_produit']+"' src='common/images/"+list['image_produit']+"' />"
+							
+										+"				<div class='info'>"
+						
+										+"					<div class='row'>"
+										+"						<div class='col-sm-10 col-sm-offset-1'>"
+										+"							<h2 class='title'>"+list['lib_produit']+ ' -' +list['reduction']+ "%</h2>"
+										+"						</div>"	
+										+"					</div>"
+										+"					<div class='row'>"
+										+"						<div class='col-sm-3'>Prix:</div>"
+										+"						<div class='col-sm-9'>"+(list['prix_initial']-(list['prix_initial']/100*list['reduction']))+" F</div>"
+										+"					</div>"
+										+"					<div class='row'>"
+										+"						<div class='col-sm-3'>Fin:</div>"
+										+"						<div class='col-sm-9'></strong>"+list['date_fin_promo']+"</div>"
+										+"					</div>"
+										+"					<div class='row'>"
+										+"						<div class='col-sm-3'>Structure:</div>"
+										+"						<div class='col-sm-9'>"+list['nom_structure']+"</div>"
+										+"					</div>"
+										+"					<div class='row'>"
+										+"						<div class='col-sm-3'>Address:</div>"
+										+"						<div class='col-sm-9'>"+list['contact_structure']+"</div>"
+										+"					</div>"							
+										+"				</div>"
+
+										+"		</li>";
+									+"</a>";
 								
 			
 			}

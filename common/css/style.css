@@ -1277,7 +1277,7 @@ footer,.footer {
 		margin: 0px;
 		padding: 0px;
 	}
-	.event-list > li {
+	.event-list > a > li {
 		background-color: rgb(255, 255, 255);
 		box-shadow: 0px 0px 5px rgb(51, 51, 51);
 		box-shadow: 0px 0px 5px rgba(51, 51, 51, 0.7);
@@ -1285,7 +1285,7 @@ footer,.footer {
 		margin: 0px 0px 5px;
 	}
 
-	.event-list > li > img {
+	.event-list > a > li > img {
 		width: 100%;
 	}
 
@@ -1298,38 +1298,40 @@ footer,.footer {
 			height: 100px;
 			padding: 0px;
 		}
-		.event-list > li > time,
-		.event-list > li > img  {
+		.event-list > a > li > time,
+		.event-list > a > li > img  {
 			display: inline-block;
 		}
-		.event-list > li > time,
-		.event-list > li > img {
-			width: 100px;
+		.event-list > a > li > time,
+		.event-list > a > li > img {
+			width: 95px;
 			float: left;
 		}
-		.event-list > li > .info {
+		.event-list > a > li > .info {
 			background-color: rgb(245, 245, 245);
 			overflow: hidden;
-			padding-left: 10px;
+			padding-left: 0px;
 		}
-		.event-list > li > time,
-		.event-list > li > img {
-			width: 100px;
-			height: 100px;
-			padding: 0px;
-			margin: 0px;
+		.event-list > a > li > time,
+		.event-list > a > li > img {
+			width: 95px;
+			height: 95px;
+			padding: 2px;
+			margin: 2px;
+			border: 1px solid #CCCCCC;
+			border-radius:3px;
 		}
-		.event-list > li > .info {
+		.event-list > a > li > .info {
 			position: relative;
 			height: 100px;
 			text-align: left;
-			padding-right: 40px;
+			padding-right: 10px;
 		}	
-		.event-list > li > .info > .title, 
-		.event-list > li > .info > .desc {
+		.event-list > a > li > .info > .title, 
+		.event-list > a > li > .info > .desc {
 			padding: 0px 10px;
 		}
-		.event-list > li > .info > ul {
+		.event-list > a > li > .info > ul {
 			position: absolute;
 			left: 0px;
 			bottom: 0px;
