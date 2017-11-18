@@ -64,11 +64,38 @@
 			}
 			
 		}
+		
+/*******************Essai info caroussel**********************/
+		
+		
+		foreach($categories as $categorie):
+
+			$infosCat[] = $map->getStructuresOfCatProd($categorie->lib_categorie_produit);
+		
+		endforeach;
+ 	$catLen = count($infosCat);
+
+ //	for ($i = 0; $i < $catLen; $i++){
+		foreach($infosCat as $key => $value ){
+				print_r($key);
+				print_r("----------------------------------");
+				print_r($value[$key]['code_structure']);
+				print_r("------+++++++++++");
+				print_r($value[$key]['lib_categorie_produit']);
+				print_r("---*************************");
+				print_r($value[$key]['lib_produit']);
+				print_r("---*************************");
+				print_r($value[$key]['prix_initial']);
+			}
+//	}
+		die();
+		
+/*****************Fin Essai info caroussel********************/
 	
 		
 		
 		require_once("view/vueIndex.php");
-		
+			
        
     } catch (Exception $e) {
         $msgErreur = $e->getMessage();

@@ -1,6 +1,7 @@
 <?php include_once("template/vueHeader.php"); ?>
 
 	<body>
+	
 		<?php include_once("template/vueNavbar.php"); ?>
 		
 		<div id="map-canvas" style="z-index:2;"></div>
