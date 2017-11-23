@@ -10,9 +10,8 @@ class Map extends BDD{
 //__Affiche toutes les structure actives qui ont des produits en solde sur une Google Maps
     function getAllMarkersActif(){
         $bdd = parent::getBdd();	
-		
-		$sql = "SELECT * FROM produits AS pd INNER JOIN structures AS st ON pd.code_structure = st.code_structure INNER JOIN categorieproduits AS cp ON pd.code_categorie_produit = cp.code_categorie_produit WHERE pd.date_debut_promo <= NOW() AND pd.date_fin_promo >= NOW() AND st.date_limite_activite >= NOW() ORDER BY pd.lib_produit DESC";
-//puis aller dynamiser vueIndex.php ligne 58
+
+		$sql = "SELECT *, DATE_FORMAT(date_fin_promo, '%d/%m/%Y') AS date_fin_promo FROM produits AS pd INNER JOIN structures AS st ON pd.code_structure = st.code_structure INNER JOIN clients AS clt ON st.code_client = clt.code_client INNER JOIN categorieproduits AS cp ON pd.code_categorie_produit = cp.code_categorie_produit WHERE pd.date_debut_promo <= NOW() AND pd.date_fin_promo >= NOW() AND clt.date_fin_formule >= NOW() ORDER BY pd.date_debut_promo DESC";
 
         $datas = $bdd->query($sql);
 		$count = array();
@@ -26,8 +25,8 @@ class Map extends BDD{
 //__Affiche les structure actives qui ont des produits en solde selon la catégorie
     function getMarkersCategory($category= ""){
         $bdd = parent::getBdd();
-	
-		$sql = "SELECT * FROM produits AS pd INNER JOIN structures AS st ON pd.code_structure = st.code_structure INNER JOIN categorieproduits AS cp ON pd.code_categorie_produit = cp.code_categorie_produit WHERE pd.date_debut_promo <= NOW() AND pd.date_fin_promo >= NOW() AND st.date_limite_activite >= NOW() AND cp.lib_categorie_produit = '".$category."'";
+
+		$sql = "SELECT *, DATE_FORMAT(date_fin_promo, '%d/%m/%Y') AS date_fin_promo FROM produits AS pd INNER JOIN structures AS st ON pd.code_structure = st.code_structure INNER JOIN clients AS clt ON st.code_client = clt.code_client INNER JOIN categorieproduits AS cp ON pd.code_categorie_produit = cp.code_categorie_produit WHERE pd.date_debut_promo <= NOW() AND pd.date_fin_promo >= NOW() AND clt.date_fin_formule >= NOW() AND cp.lib_categorie_produit = '".$category."' ORDER BY pd.date_debut_promo DESC";
 	
         $datas = $bdd->query($sql);
 		$count = array();
@@ -42,8 +41,8 @@ class Map extends BDD{
     function getAllCategory( ) {
         $bdd = parent::getBdd( );
 
-		$sql = "SELECT * FROM categorieproduits";
-		
+		$sql = "SELECT DISTINCT categorieproduits.lib_categorie_produit FROM categorieproduits, produits, structures, clients WHERE categorieproduits.code_categorie_produit = produits.code_categorie_produit AND produits.code_structure = structures.code_structure AND clients.code_client = structures.code_client AND produits.date_debut_promo <= NOW() AND produits.date_fin_promo >= NOW() AND clients.date_fin_formule >= NOW()";
+
         $datas = $bdd->query($sql);
 		$count = array();
 		while ($resultat = $datas->fetch(PDO::FETCH_OBJ)) {
@@ -55,13 +54,8 @@ class Map extends BDD{
 //__Recuperation pour affichage du produit ayant cet id.
 	function getIdProduit( $id ) {
 	    $bdd = parent::getBdd();
-	
-		$sql = "SELECT *";
-		$sql .= " FROM produits AS pd";
-		$sql .= " INNER JOIN structures AS st";
-		$sql .= " ON pd.code_structure = st.code_structure";
-		$sql .= " WHERE pd.code_produit=".$id;
-	
+
+		$sql = "SELECT * FROM produits AS pd INNER JOIN structures AS st ON pd.code_structure = st.code_structure WHERE pd.code_produit=".$id;
 		$datas = $bdd->query($sql);
 	
 		if ($resultat = $datas->fetch(PDO::FETCH_OBJ)) {
@@ -77,9 +71,11 @@ class Map extends BDD{
 		$sql = "SELECT *";
 		$sql .= " FROM commentaires";
 		$sql .= " WHERE code_produit=".$id;
+		$sql .= " ORDER BY date_cmt DESC";
 	
 		$datas = $bdd->query($sql);
-	
+		
+		$count = array();
 		while ($resultat = $datas->fetch(PDO::FETCH_OBJ)) {
 	        $count[] = $resultat;
 	    }
@@ -103,22 +99,12 @@ class Map extends BDD{
 		$stmt->execute();
     }
     
-/*******************Essai info caroussel**********************/
-	function getStructuresOfCatProd( $catProd ) {
+/*******************Info caroussel**********************/
+	function getInfoProdByCat( $catProd ) {
 		$bdd = parent::getBdd();
-		
-		$sql = "SELECT * FROM categorieproduits, structures, produits WHERE categorieproduits.code_categorie_produit = produits.code_categorie_produit AND produits.code_structure = structures.code_structure AND categorieproduits.lib_categorie_produit = '".$catProd."' GROUP BY structures.nom_structure";
-		
-		
-/*
-		$sql = "SELECT *";
-		$sql .= " FROM structures AS st";
-		$sql .= " INNER JOIN produits AS pd";
-		$sql .= " ON st.code_structure = pd.code_structure";
-		$sql .= " INNER JOIN categorieproduits AS cp";
-		$sql .= " ON pd.code_categorie_produit = cp.code_categorie_produit";
-		$sql .= " WHERE cp.lib_categorie_produit ='".$catProd."'";
-*/
+
+		$sql = "SELECT *, DATE_FORMAT(date_fin_promo, '%d/%m/%Y') AS date_fin_promo FROM categorieproduits, clients, structures, produits WHERE categorieproduits.code_categorie_produit = produits.code_categorie_produit AND produits.code_structure = structures.code_structure AND clients.code_client = structures.code_client AND produits.date_debut_promo <= NOW() AND produits.date_fin_promo >= NOW() AND clients.date_fin_formule >= NOW() AND categorieproduits.lib_categorie_produit = '".$catProd."' ORDER BY produits.reduction DESC";
+
 		$datas = $bdd->query($sql);
 
 		$count = array();
@@ -130,7 +116,7 @@ class Map extends BDD{
 		return $count; // Accès au résultat
 	}
 	
-/*****************Fin Essai info caroussel********************/
+/*****************Fin info caroussel********************/
     
 
 }

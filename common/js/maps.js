@@ -22,7 +22,8 @@
 		document.getElementById('myLocation').onclick = function (e) {
 			currentLocation();
 		};
-
+		
+		
 	/**********************************************
 	 * carte Leaflet
 	 **********************************************/
@@ -34,7 +35,7 @@
 	lat = lat ? lat.innerHTML : 5.322306;
 	lng = lng ? lng.innerHTML : (-4.016299);
 	
-	
+
 	var mymap = L.map('map-canvas').setView([lat, lng], leZoom);
 	/*  mymap.zoomControl.setPosition('topright');  */
 			
@@ -44,6 +45,22 @@
 				id: 'mapbox.streets',
 				accessToken: 'your.mapbox.access.token'
 			}).addTo(mymap);
+			
+// entourer le la position du produit selectionné...
+	var lat1 = document.getElementById('latitude');
+	var lng1 = document.getElementById('longitude');
+	
+	if(lat1 && lng1){	
+		lat1 =lat1.innerHTML;
+		lng1 =lng1.innerHTML;	
+	
+		var circle1 = L.circle([lat1, lng1], {
+							color: 'rgba(255, 0, 0, 0.1)',
+							fillColor: '#f03',
+							fillOpacity: 0.1,
+							radius: 50
+						}).addTo(mymap);
+	}
 			
 			
 	for(var i=0; i<marker.length; i++){
@@ -67,7 +84,7 @@
 					+"  <img src='common/images/"+station['image_produit']+"' class='w3-circle w3-margin-right' style='width:60px'>"
 					+"</div>"
 					+"<div class='w3-col s9 w3-bar' style='margin:0px;'>"
-					+"  <span><h2 style='padding:0px;margin:0px;'>"+station['lib_produit']+"</h2>, <strong>"+(station['prix_initial']-(station['prix_initial']/100*station['reduction']))+"fr</strong> "+station['prix_initial']+"fr</span><br>"
+					+"  <span style='font-size:1.3em;'><h2 style='padding:0px;margin:0px;'>"+station['lib_produit']+"</h2> Prix : <strong>"+(station['prix_initial']-(station['prix_initial']/100*station['reduction']))+" </strong>F</span><br>"
 					+"  <span>"+station['nom_structure']+", tel:"+station['contact_structure']+"</span>"
 					+"</div>"
 				+"</div>"
@@ -78,14 +95,14 @@
 			
 			if(station['code_structure'] === station2['code_structure'] && station['code_produit'] !== station2['code_produit']){
 
-				info += "<a href='index.php?produit="+station['code_produit']+"&lat="+station2['latitude']+"&lng="+station2['longitude']+"'>"
-					+"<div class='w3-container w3-row'>"
-						+"<div class='w3-col s3'>"
-						+"  <img src='/w3images/avatar2.png' class='w3-circle w3-margin-right' style='width:46px'>"
+				info += "<a href='index.php?produit="+station2['code_produit']+"&lat="+station2['latitude']+"&lng="+station2['longitude']+"'>"
+					+"<div class='w3-container w3-row' style='padding:0px;margin:0px;width:300px;text-align:center;border-top:1px solid #CCC'>"
+						+"<div class='w3-col s3'style='margin:0px;'>"
+						+"  <img src='common/images/"+station2['image_produit']+"' class='w3-circle w3-margin-right' style='width:60px'>"
 						+"</div>"
-						+"<div class='w3-col s9 w3-bar'>"
-						+"  <span>"+station['lib_produit']+", <strong>"+(station['prix_initial']-(station['prix_initial']/100*station['reduction']))+"fr</strong> "+station['prix_initial']+"fr</span><br>"
-						+"  <span>"+station['nom_structure']+", tel:"+station['contact_structure']+"</span>"
+						+"<div class='w3-col s9 w3-bar' style='margin:0px;'>"
+						+"  <span style='font-size:1.3em;'><h2 style='padding:0px;margin:0px;'>"+station2['lib_produit']+"</h2> Prix : <strong>"+(station2['prix_initial']-(station2['prix_initial']/100*station2['reduction']))+" </strong>F</span><br>"
+						+"  <span>"+station2['nom_structure']+", tel:"+station2['contact_structure']+"</span>"
 						+"</div>"
 					+"</div>"
 					+"</a>";
@@ -102,6 +119,9 @@
 	var markerLen = marker.length;
 
 	if(listProd){
+		if(markerLen){
+			listProd.innerHTML = '';
+		}
 		for (i=0; i<markerLen && i<50; i++){
 			if(marker[i]){
 				list = marker[i];
@@ -122,7 +142,7 @@
 										+"					</div>"
 										+"					<div class='row'>"
 										+"						<div class='col-sm-3'>Fin:</div>"
-										+"						<div class='col-sm-9'></strong>"+list['date_fin_promo']+"</div>"
+										+"						<div class='col-sm-9'>"+list['date_fin_promo']+"</div>"
 										+"					</div>"
 										+"					<div class='row'>"
 										+"						<div class='col-sm-3'>Structure:</div>"
@@ -142,7 +162,10 @@
 		}
 	}
 	
+
+
 })();
+
 
 /**************menu moovant******************/
 
@@ -175,14 +198,17 @@ var img = masqAffich.getElementsByTagName('img')[0];
 var menu = document.getElementById('menu');
 var carte = document.getElementById('map-canvas');
 var menuStyle = menu.style;
+var reseauSociaux = document.getElementById('accordion');
 
 masqAffich.onclick = function(){
 	if(menuStyle.visibility == 'hidden'){
-		menuStyle.visibility = 'visible';
 		this.style.left = '360px';
 		carte.style.left = '360px';
+		reseauSociaux.style.visibility = 'visible';
 		img.src = 'common/images/masquer_menu.png';
+		menuStyle.visibility = 'visible';
 	}else{
+		reseauSociaux.style.visibility = 'hidden';
 		menuStyle.visibility = 'hidden';
 		this.style.left = '0px';
 		carte.style.left = '0%';
@@ -427,3 +453,4 @@ $("#menu-close").click(function(e)							//declare the element event ...'(e)' = 
 	*/
 });	
 /****************** Fin nouveau design **********************/
+

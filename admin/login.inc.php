@@ -13,7 +13,7 @@
 		
 		if ($login&&$password) {
 			try {
-					$select=$db->prepare("SELECT * FROM users  WHERE login=? AND password =?");
+					$select=$db->prepare("SELECT * FROM users,roles  WHERE users.code_role=roles.code_role AND login=? AND password =?");
 					$params=array($login,$password);
 					$select->execute($params);
 					$nbre = assert ('$db->prepare("SELECT * FROM users  WHERE login=? AND password =?")');
@@ -49,7 +49,7 @@
          		$_SESSION['user_id'] = $data['user_id'];
 		 		$destination=$data['page'];
 
-				header("Location:$destination"); 
+				header("Location:compte.php"); 
 			}
 			else{
 				header("Location:identification.php?erreur=intru"); 

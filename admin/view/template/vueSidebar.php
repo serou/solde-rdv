@@ -1,14 +1,36 @@
+<!-- <div class="col-md-2 sidebar">
+	<ul class="nav nav-sidebar">
+		<li <?php //if ($page == "compte"): ?> class="active" <?php //endif; ?> ><a href="compte.php">Votre compte</a></li>
+		<li <?php //if ($page == "typeStructure"): ?> class="active" <?php //endif; ?> ><a href="typeStructure.php">Type Structure</a></li>
+		<li <?php //if ($page == "role"): ?> class="active" <?php //endif; ?> ><a href="role.php">Rôle Utilisateur</a></li>
+		<li <?php //if ($page == "users"): ?> class="active" <?php //endif; ?> ><a href="user.php">Utilisateur</a></li>
+		<li <?php //if ($page == "formule"): ?> class="active" <?php //endif; ?> ><a href="formule.php">Formule Client</a></li>
+		<li <?php //if ($page == "client"): ?> class="active" <?php //endif; ?> ><a href="client.php">Client</a></li>
+		<li <?php //if ($page == "structure"): ?> class="active" <?php //endif; ?> ><a href="structure.php">Structure</a></li>
+		<li <?php //if ($page == "category"): ?> class="active" <?php //endif; ?> ><a href="category.php">Catégories</a></li>
+		<li <?php //if ($page == "markers"): ?> class="active" <?php //endif; ?> ><a href="produits.php">Produits</a></li>
+	</ul>
+	
+	
+	<ul class="nav nav-sidebar">
+		<li><a href="#">Nav item again</a></li>
+		<li><a href="#">One more nav</a></li>
+		<li><a href="#">Another nav item</a></li>
+	</ul>
+	
+</div> -->
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container w3-row">
-	<div class="w3-col s4">
-	  <img src="/w3images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
-	</div>
-	<div class="w3-col s8 w3-bar">
-	  <span>Welcome, <strong>Mike</strong></span><br>
-	  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
-	  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
-	  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
-	</div>
+    <div class="w3-col s4">
+
+      <img src="../common/images/user-map/<?php echo $_SESSION['login']; ?>.jpg" class="w3-circle w3-margin-right" style="width:46px">
+    </div>
+    <div class="w3-col s8 w3-bar">
+      <span>Welcome, <strong><?php echo strtoupper($_SESSION['login']); ?></strong></span><br>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+    </div>
   </div>
   <hr>
   <div class="w3-container">

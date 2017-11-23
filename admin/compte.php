@@ -15,11 +15,58 @@
  
 //__inclusion des différentes classes
 
-	try {
-		require_once("view/vueCompte.php");
+//	try {
+
+		require('model/BDD.php');
+        require('model/Map.php');
+        require('model/Debug.php');
+
+        $map = new Map();
 		
-	} catch (Exception $e) {
+
+		 if(file_exists('compteur_visites.txt'))
+	      {
+	              $compteur_f = fopen('compteur_visites.txt', 'r+');
+	              $compte = fgets($compteur_f);
+	      }
+	      else
+	      {
+	              $compteur_f = fopen('compteur_visites.txt', 'a+');
+	              $compte = 0;
+	      }
+	      if(!isset($_SESSION['compteur_de_visite']))
+	      {
+	              $_SESSION['compteur_de_visite'] = 'visite';
+	              $compte++;
+	              fseek($compteur_f, 0);
+	              fputs($compteur_f, $compte);
+	      }
+	      fclose($compteur_f);
+		
+		$pageClient = $_SESSION['PROFILE']['page'];
+
+		$countstructures = $map->getCountStructure();
+
+	    $countusers = $map->getCountUsers();
+
+	    $countclients = $map->getCountClients();
+
+	    $countcategorieProduits = $map->getCountCategorieProd();
+
+	    $countProdByCats = $map->getCountProdByCat();
+	    
+	    $recentUsers = $map->getRecentUsers();
+	    //$recentComments = $map->getRecentComment();
+	    $recentProduits = $map->getRecentProduits();
+	    $countProduits = $map->getCountProduits();
+	    $countCategories = $map->getCountCategories();
+		$username = $_SESSION['PROFILE']['login'];
+
+		require_once("view/vueCompte.php");
+
+		
+/*	} catch (Exception $e) {
 	    $msgErreur = $e->getMessage();
 	    require_once("view/vueErreur.php");
-	}
+	}*/
 }

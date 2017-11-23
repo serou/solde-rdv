@@ -65,32 +65,22 @@
 			
 		}
 		
-/*******************Essai info caroussel**********************/
+/*******************Info caroussel**********************/
 		
-		
+		$infosCat = array();
 		foreach($categories as $categorie):
 
-			$infosCat[] = $map->getStructuresOfCatProd($categorie->lib_categorie_produit);
-		
+			$infosCat[] = $map->getInfoProdByCat($categorie->lib_categorie_produit);
+			
 		endforeach;
- 	$catLen = count($infosCat);
-
- //	for ($i = 0; $i < $catLen; $i++){
-		foreach($infosCat as $key => $value ){
-				print_r($key);
-				print_r("----------------------------------");
-				print_r($value[$key]['code_structure']);
-				print_r("------+++++++++++");
-				print_r($value[$key]['lib_categorie_produit']);
-				print_r("---*************************");
-				print_r($value[$key]['lib_produit']);
-				print_r("---*************************");
-				print_r($value[$key]['prix_initial']);
-			}
-//	}
-		die();
+// stockage du nombre de categorie...	
+ 		$catLen = count($infosCat);
+// stockage du nombre de produit de chaque categorie...
+	 	for($i = 0; $i < $catLen; $i++){		
+	 		$elemCatLen[] = count($infosCat[$i]);
+	 	}		
 		
-/*****************Fin Essai info caroussel********************/
+/*****************Fin info caroussel********************/
 	
 		
 		

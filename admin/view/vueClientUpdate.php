@@ -9,7 +9,7 @@
 				
 				<div class="col-md-6 col-md-offset-3">
 					
-				<form action="clientUpdate.php?code_client=<?php echo $info->code_client; ?>" method="post">
+				<form action="clientUpdate.php?code_client=<?php echo $info->code_client; ?>" method="post" enctype="multipart/form-data">
 						<div class="panel-heading"><strong>Modification du Client</strong></div>
 						<div><br></div>
 						
@@ -86,14 +86,20 @@
 							</select>
 						</div>
 						<div class="form-group">
+							<label for="inputImage">Image Client : </label>
+							<span class="error">* <?php echo $image_clientErr;?></span><br>
+							<img src="../common/images/client-map/<?php echo $info->image_client;?>.jpg" width="90" heigth="90" />
+							<input type="file" id="inputImage" name="image_client"/>
+						</div>
+						<!-- <div class="form-group">
 							<label for="inputPage">Page : </label>
 							<select class="form-control" name="page">
-							  <option <?php if("compteClient.php" == $info->page) : ?>selected<?php endif; ?> value="compteClient.php">Compte Client</option>
-							  <option <?php if("compteUser.php" == $info->page) : ?>selected<?php endif; ?> value="compteUser.php">Compte User</option>
-							  <option <?php if("compte.php" == $info->page) : ?>selected<?php endif; ?> value="compte.php">Compte Administrateur</option>
+							  <option <?php //if("compteClient.php" == $info->page) : ?>selected<?php //endif; ?> value="compteClient.php">Compte Client</option>
+							  <option <?php //if("compteUser.php" == $info->page) : ?>selected<?php //endif; ?> value="compteUser.php">Compte User</option>
+							  <option <?php //if("compte.php" == $info->page) : ?>selected<?php //endif; ?> value="compte.php">Compte Administrateur</option>
 							</select>
 							<span class="error"><?php echo $pageErr; ?></span>
-						</div>
+						</div> -->
 						
 					<div class="form-group">
 						<br>

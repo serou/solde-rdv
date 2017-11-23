@@ -15,12 +15,12 @@
 		require('model/BDD.php');
 		require('model/Map.php');
 		require('model/Debug.php');
-		
+		$pageClient = $_SESSION['PROFILE']['page'];
 		
 
 		try {
 			$map = new Map();
-			$nom_clientErr = $prenom_clientErr = $contact_1Err = $emailErr = $passwordErr=$ancpasswordErr= $nvxpasswordErr=$confpasswordErr=$loginErr=$code_formuleErr = $latitudeErr = $longitudeErr= $pageErr="";
+			$nom_clientErr = $prenom_clientErr = $contact_1Err = $emailErr =$image_clientErr= $passwordErr=$ancpasswordErr= $nvxpasswordErr=$confpasswordErr=$loginErr=$code_formuleErr = $latitudeErr = $longitudeErr= $pageErr="";
 			
 			if(!empty($_GET)){
 				$code_client = strip_tags($_GET['code_client']);
@@ -41,7 +41,7 @@
 					$nvxpassword = md5($nvxpassword);
 					$confpassword = md5($confpassword);
 					$email = strip_tags($_POST['email']);
-					$page = strip_tags($_POST['page']);
+					$page = "compteClient.php";
 					$prenom_client = strip_tags($_POST['prenom_client']);
 					$adress_postal = strip_tags($_POST['adress_postal']);
 					$longitude = strip_tags($_POST['longitude']);
@@ -51,7 +51,11 @@
 					$code_formule = strip_tags($_POST['code_formule']);
 
 					$username = $_SESSION['login']; 
-					
+
+					$nomPhoto = $_FILES["image_client"]['name'];
+					$fichierTempo =  $_FILES["image_client"]['tmp_name'];
+
+
 					if (empty($nom_client)) {
 		    			$nom_clientErr = "Name is required";
 		  			} else {
@@ -180,17 +184,37 @@
 		  			}
 
 		  			if ($login && $nvxpassword != 'd41d8cd98f00b204e9800998ecf8427e' && $confpassword != 'd41d8cd98f00b204e9800998ecf8427e' && $ancpassword == $donnes->password && $confpassword==$nvxpassword && $code_formule && $page &&  $email && $nom_client && $prenom_client && $contact_1 && $longitude && $latitude ) {
+		  				$fichierTempo =  $_FILES["image_client"]['tmp_name'];	
+		  				if ($fichierTempo =="") {
+							
+							$update = $map->getUpdateClientFile($code_client,$nom_client,$prenom_client,$contact_1,$contact_2,$adress_postal,$email,$login,$confpassword,$longitude,$latitude,$code_formule,$page,$username);
+							header('Location:client.php');
+						}else{
 
-						$update = $map->getUpdateClient($code_client,$nom_client,$prenom_client,$contact_1,$contact_2,$adress_postal,$email,$login,$confpassword,$longitude,$latitude,$code_formule,$page,$username);			
-						header('Location:client.php');
-					}else{
-
+							if ($nom_client.'-'.$prenom_client==$info->image_client) {
+								print_r("test2");
+							die();
+								//mise a jour sans le parametre image
+								move_uploaded_file($fichierTempo, '../common/images/client-map/'.$nom_client.'-'.$prenom_client.'.jpg');	
+								$image_client = $nom_client.'-'.$prenom_client; 
+								$update = $map->getUpdateClient($code_client,$nom_client,$prenom_client,$contact_1,$contact_2,$adress_postal,$email,$login,$confpassword,$longitude,$latitude,$code_formule,$page,$username,$image_client);
+								header('Location:client.php');
+							}else{
+								
+								move_uploaded_file($fichierTempo, '../common/images/client-map/'.$nom_client.'-'.$prenom_client.'.jpg');	
+								$image_client = $nom_client.'-'.$prenom_client; 
+								$update = $map->getUpdateClient($code_client,$nom_client,$prenom_client,$contact_1,$contact_2,$adress_postal,$email,$login,$confpassword,$longitude,$latitude,$code_formule,$page,$username,$image_client);
+								header('Location:client.php');
+							}	
+						}
+					}
+					else{
+					
 						$formules = $map->getFormule();
 						require_once("view/vueClientUpdate.php");
 					}	
 				}
 			}
-			
 			require_once("view/vueClientUpdate.php");
 			
 		} catch (Exception $e) {

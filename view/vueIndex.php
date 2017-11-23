@@ -6,12 +6,12 @@
 		
 		<div id="map-canvas" style="z-index:2;"></div>
 <!-- se positionner -->
-		<div id="myLocation" class="mylocation" title="Me positionner" style="cursor:pointer">
+		<div id="myLocation" class="mylocation" title="Me positionner" style="cursor:pointer;">
 			<i class="fa fa-location-arrow" style="font-size:30px;color:rgba(0, 0, 0, 0.7);"></i>
 		</div>
 <!-- fin se positionner -->
 		
-		<nav id="menu" class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:360px;" id="mySidebar"><br>
+		<nav id="menu" class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:360px;background-image: url('common/images/fontNav.jpg');" id="mySidebar"><br>
 		  
 <?php if (!empty($prod))
 	{
@@ -21,7 +21,7 @@
 			  <div class="w3-white w3-text-grey w3-card-4">
 				<div class="w3-display-container" id="image_produit">
 				
-					<img src="<?php echo 'common/images/'. $prod->image_produit ?>" alt="Avatar" class="image" style="width:100%">
+					<img src="<?php echo 'common/images/'. $prod->image_produit ?>" alt="Avatar" class="image" style="width:100%;min-height:150px;">
 				    <div class="middle">
 					  <div class="text"><?php echo nl2br(stripslashes($prod->lib_produit)) .' -'. nl2br(stripslashes($prod->reduction)) .'%' ?></div>
 				    </div>
@@ -35,13 +35,15 @@
 				  <i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><?php echo nl2br(stripslashes($prod->contact_structure)) ?></p>
 				  
 				</div>
-				<div style="padding-left:20px;overflow:scroll;">
-					<h3>Commentaires</h3>
-				<?php foreach ( $commentaires as $commentaire ) : ?>
-					<p style="padding:0px;"><strong> <?php echo nl2br(stripslashes($commentaire->nom_propr_cmt)); ?> :</strong> <?php echo nl2br(stripslashes($commentaire->text_cmt)); ?> <span style="font-size:0.6em"><?php $date =strtotime($commentaire->date_cmt); echo date('d/m/Y',$date); ?></span></p>
+				<div class="w3-container" style="padding-left:20px;">
+					<h3 style="padding:0px;margin:0px;text-align:center;font-size:1em;">Commentaires</h3>
+					<div class="w3-container" style="height:80px;overflow:hidden;">
+					<?php foreach ( $commentaires as $commentaire ) : ?>
+						<p style="padding:0px;margin:0px;font-size:0.9em;"><strong> <?php echo nl2br(stripslashes($commentaire->nom_propr_cmt)); ?> :</strong> <?php echo nl2br(stripslashes($commentaire->text_cmt)); ?> <span style="font-size:0.6em"><?php $date =strtotime($commentaire->date_cmt); echo date('d/m/Y',$date); ?></span></p>
 				
-				<?php endforeach;  ?>
-					<form  id="form_commentaire" class="form-inline" action="index.php?produit=<?php echo $produit ?>" method="POST">
+					<?php endforeach;  ?>
+					</div>
+					<form  id="form_commentaire" class="form-inline" action="index.php?produit=<?php echo $produit ?>&lat=<?php echo $prod->latitude ?>&lng=<?php echo $prod->longitude ?>" method="POST">
 						  <label class="sr-only" for="pseudo">Pseudo:</label>
 						  <input class="form-control w3-input w3-animate-input" type="text" id="pseudo" placeholder="Votre pseudo"  name="pseudo" style="width:135px; height:35px; max-width:70%"><br>
 						
@@ -60,7 +62,7 @@
  	 
 ?>
 		  <div class="w3-container w3-row">
-			<div class="w3-col s4">
+			<div class="w3-col s2 col-sm-offset-2">
 			  <img src="/w3images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
 			</div>
 			<div class="w3-col s8 w3-bar">
@@ -73,11 +75,12 @@
 		  <hr>
 		  
 		  <div class="w3-container-fluid">
-			<h2>soldes recents</h2>
+			<h2 style="text-align:center;font-size:1.2em;">Soldes recents</h2>
 				<div class='container-fluid'>
 					<div class='row'>
 						<div class='col-xs-12' style="padding-left:5px;padding-right:5px;">
 							<ul class='event-list' id="list_produit">
+								<div>Il n'y a aucun solde de disponible pour l'instant !</div>
 							
 							</ul>
 						</div>
@@ -90,13 +93,13 @@
 ?>
 		</nav>
 		
-		 <div id="masquerAfficherMenu" class="w3-animate-left" style="position:absolute;left:360px;top:300px;visibility:visible;cursor:pointer;z-index:5;"><img src="common/images/masquer_menu.png"/></div>
+		 <div id="masquerAfficherMenu" class="w3-animate-left"><img src="common/images/masquer_menu.png"/></div>
 		 
 		<?php if (isset($_GET['lat']) && isset($_GET['lat']) )
 			{
 		?>
-			<div id="latitude" style="visibility:hidden;"><?php echo $_GET['lat'] ?></div>
-			<div id="longitude" style="visibility:hidden;"><?php echo $_GET['lng'] ?></div>
+			<div id="latitude" style="display:none;"><?php echo $_GET['lat'] ?></div>
+			<div id="longitude" style="display:none;"><?php echo $_GET['lng'] ?></div>
 		<?php 
 			}
 			

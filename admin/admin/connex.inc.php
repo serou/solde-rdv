@@ -4,7 +4,7 @@
  */
 	if ("localhost" == $_SERVER['HTTP_HOST']){
 		//__variable locale lié à la classe
-		$localhost = 'mysql:host=127.0.0.1;port=3306;dbname=solde_rdv;charset=utf8';
+		$localhost = 'mysql:host=localhost;port=3306;dbname=solde_rdv;charset=utf8';
 		$user = 'root';
 		$password = '';
 	} elseif ("domaine-distant" == $_SERVER['HTTP_HOST']){

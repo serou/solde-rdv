@@ -34,7 +34,7 @@ class BDD {
         $bdd = self::getBdd();
         $sql = "SELECT *";
 		$sql .= "FROM `users`";
-		$sql .= "WHERE idclef='".$idClef."' ";
+		//$sql .= "WHERE idclef='".$idClef."' ";
                 
         $user = $bdd->query($sql);
 
